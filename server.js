@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // JS object to hold project data
-const projectData = {}
+const projectData = []
 
 // Dependencies
 const bodyParser = require('body-parser');
@@ -32,33 +32,27 @@ app.get('/all', (req, res)=> {
   res.send(projectData);
 });
 
-// * Set up POST routes *
-// *
-// *
-// First test the route
-app.post('/add', (req, res)=> {
-  res.send('POST received');
-});
+// TODO: SET UP POST ROUTES
+app.post('/add', addData);
 
-// Then a route for 'temperature'
-const tempData = [];
+function addData (req, res) {
+  let newData = {
+    date: req.body.date,
+    temp: req.body.temp,
+    thoughts: req.body.thoughts
+  }
+  console.log(newData)
+  projectData.push(newData)
+  res.send(projectData)
+  console.log(projectData)
+}
 
-app.post('/temp', (req, res)=> {
-  tempData.push(req.body);
-});
+// Dummy API (for testing)
+const fakeData = {"tempurature": 280}
 
-// Then a route for 'date'
-const dateData = [];
+app.get('/fakeAPI', getFakeData)
 
-app.post('/date', (req, res) => {
-  dateData.push(req.body);
-});
-
-// Then a route for 'user response'
-const userData = [];
-
-app.post('/user', (req, res) => {
-  userData.push(req.body);
-});
-// *
-// *
+function getFakeData(req, res) {
+  res.send(Object.values(fakeData));
+}
+// * * * * *

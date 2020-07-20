@@ -4,8 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+  <a id="top"></a>
+  <header id="page-header">
+    <h1>Weather Wonder</h1>
+    <h2>Relax. Reflect. Record.</h2>
+  </header>
+  <main>
+    <div id="instructions">
+      <h2>Enter your zip code & some weathery thoughts to post!</h2>
+    </div>
+    <form>
+      <input type="text" id="zip" placeholder="your current zip here"><br>
+      <textarea  id="thoughts" placeholder="Write your thoughts here"></textarea>
+      <input type="submit" id="submit" value="Post">
+    </form>
+    <div id="date">
+      <h2></h2>
+    </div>
+    <div id="temp">
+      <h2></h2>
+    </div>
+    <div id="posted-thoughts">
+      <h2></h2>
+    </div>
+  </main>
+  <footer>
+    <a href="#top">Back to Top</a>
+  </footer>
 </body>
+<script src="app.js" type="text/javascript"></script>
 </html>
