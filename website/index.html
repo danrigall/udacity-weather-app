@@ -8,28 +8,31 @@
 </head>
 <body>
   <a id="top"></a>
-  <header id="page-header">
+  <header id="page_header">
     <h1>Weather Wonder</h1>
-    <h2>Relax. Reflect. Record.</h2>
+    <h2>Relax.. Reflect.. Record..</h2>
   </header>
   <main>
     <div id="instructions">
-      <h2>Enter your zip code & some weathery thoughts to post!</h2>
+      <h3>Enter your zip code & some weathery thoughts to post!</h3>
     </div>
     <form>
-      <input type="text" id="zip" placeholder="your current zip here"><br>
-      <textarea  id="thoughts" placeholder="Write your thoughts here"></textarea>
-      <input type="submit" id="submit" value="Post">
+      <input type="text" id="zip" placeholder="current zip"><br>
+      <textarea  id="write" placeholder="Write your thoughts here..."></textarea>
+      <input type="submit" id="submit" value="Submit">
     </form>
-    <div id="date">
-      <h2></h2>
-    </div>
-    <div id="temp">
-      <h2></h2>
-    </div>
-    <div id="posted-thoughts">
-      <h2></h2>
-    </div>
+    <section id="all_posts">
+      <div class="post">
+        <div class="date">7.7.1977</div>
+        <div class="temp">20</div>
+        <p class="thoughts">Some thoughts I had and stuff.</p>
+      </div>
+      <div class="post">
+        <div class="date">6.6.1966</div>
+        <div class="temp">30</div>
+        <p class="thoughts">These temps are weird, yeah?</p>
+      </div>
+    </section>
   </main>
   <footer>
     <a href="#top">Back to Top</a>

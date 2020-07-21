@@ -1,11 +1,106 @@
+/* Full body style */
+body {
+  height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(160deg, #0087ff, #ffc068);
+}
+
+
+/* Page header styles */
+#page_header {
+  font-family: 'Skia', sans-serif;
+}
+
+#page_header h1 {
+  font-weight: normal;
+  font-size: 5rem;
+  color: white;
+  letter-spacing: 8px;
+  text-shadow: white 4px 1px 6px;
+}
+
+#page_header h2 {
+  font-weight: normal;
+  font-size: 3rem;
+  color: white;
+  word-spacing: 2rem;
+}
+
+
+/* Main section styles */
+#instructions {
+  font-family: 'Gil Sans', sans-serif;
+  font-style: italic;
+}
+
+#instructions h3 {
+  font-size: 1.5rem;
+  font-weight: 100;
+  text-shadow: darkgrey 1px 1px 2px;
+  color: black;
+}
+
+form {
+  padding: 0px;
+  font-family: Courier, serif;
+}
+
+#zip {
+  font-size: 15px;
+  font-family: inherit;
+  padding: 10px;
+  border-radius: 3px;
+  border: 2px solid darkgoldenrod;
+  margin: 5px 0px;
+  background-color: #ffffffa1;
+}
+
 textarea {
   width: 100%;
   height: 150px;
-  padding: 12px 20px;
+  padding: 12px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 2px solid darkgoldenrod;
   border-radius: 4px;
-  background-color: #f8f8f8;
+  background-color: #ffffffa1;
   font-size: 16px;
   resize: none;
+}
+
+#submit {
+  padding: 8px 12px 6px;
+  font-family: 'Gill Sans', sans-serif;
+  font-size: 1rem;
+  background-color: steelblue;
+  border-radius: 3px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+#submit:hover {
+  border: 2px outset goldenrod;
+  color: white;
+  background-color: midnightblue;
+}
+
+
+/* Post area */
+#all_posts {
+  height: 100%;
+  margin-top: 10px;
+  padding-top: 10px;
+  border: 3px inset #a9a9a98c;
+  border-radius: 10px;
+  background-color: #2121218c;
+}
+
+.post {
+  border: 2px solid slategray;
+  border-radius: 4px;
+  background-color: #ffffff85;
+  padding: 10px;
+  margin: 20px;
+  width: 40rem;
+  box-shadow: darkslategrey 5px 5px 12px;
+  font-family: 'Bradley Hand', sans-serif;
 }
