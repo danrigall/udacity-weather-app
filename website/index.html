@@ -16,21 +16,16 @@
     <div id="instructions">
       <h3>Enter your zip code & some weathery thoughts to post!</h3>
     </div>
-    <form>
-      <input type="text" id="zip" placeholder="current zip"><br>
-      <textarea  id="write" placeholder="Write your thoughts here..."></textarea>
-      <input type="submit" id="submit" value="Submit">
-    </form>
+    <div id="form">
+      <input type="text" id="zip" placeholder="enter zip code here"><br>
+      <textarea  id="feelings" placeholder="Write your thoughts here..."></textarea>
+      <button id="generate">Submit</button>
+    </div>
     <section id="all_posts">
-      <div class="post">
-        <div class="date">7.7.1977</div>
-        <div class="temp">20</div>
-        <p class="thoughts">Some thoughts I had and stuff.</p>
-      </div>
-      <div class="post">
-        <div class="date">6.6.1966</div>
-        <div class="temp">30</div>
-        <p class="thoughts">These temps are weird, yeah?</p>
+      <div id="entryHolder">
+        <div id="date"></div>
+        <div id="temp"></div>
+        <div id="content"></div>
       </div>
     </section>
   </main>

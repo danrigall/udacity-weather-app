@@ -40,7 +40,7 @@ body {
   color: black;
 }
 
-form {
+#form {
   padding: 0px;
   font-family: Courier, serif;
 }
@@ -67,7 +67,7 @@ textarea {
   resize: none;
 }
 
-#submit {
+#generate {
   padding: 8px 12px 6px;
   font-family: 'Gill Sans', sans-serif;
   font-size: 1rem;
@@ -92,15 +92,18 @@ textarea {
   border: 3px inset #a9a9a98c;
   border-radius: 10px;
   background-color: #2121218c;
+  min-height: 200px;
 }
 
-.post {
-  border: 2px solid slategray;
+#entryHolder {
+  display: none;
+  border: 2px solid green;
   border-radius: 4px;
-  background-color: #ffffff85;
+  background-color: white;
   padding: 10px;
   margin: 20px;
   width: 40rem;
   box-shadow: darkslategrey 5px 5px 12px;
   font-family: 'Bradley Hand', sans-serif;
+  word-spacing: 1px;
 }
