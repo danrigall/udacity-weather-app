@@ -83,12 +83,18 @@ const updateUI = async()=> {
     const allData = await request.json()
     console.log(allData)
     document.getElementById('entryHolder').style.display = 'block'
-    document.getElementById('date').innerHTML = allData[0].date
-    document.getElementById('temp').innerHTML = allData[0].temp
+    document.getElementById('date').innerHTML = `<u>Date:</u> ${allData[0].date}`
+    document.getElementById('temp').innerHTML = `<u>Temperature:</u> ${allData[0].temp}&deg`
     document.getElementById('content').innerHTML = allData[0].thoughts
+    clearFields();
   } catch(error){
     console.log('ERROR in UI update:', error)
   }
+}
+
+function clearFields() {
+  document.getElementById('zip').value = ""
+  document.getElementById('feelings').value = ""
 }
 
 document.getElementById('generate').addEventListener('click', checkEmpty)

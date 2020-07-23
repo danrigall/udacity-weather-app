@@ -42,7 +42,7 @@ function addData (req, res) {
     thoughts: req.body.thoughts
   }
   console.log(newData)
-  projectData.push(newData)
+  projectData.unshift(newData)
   res.send(projectData)
   console.log(projectData)
 }
