@@ -46,13 +46,3 @@ function addData (req, res) {
   res.send(projectData)
   console.log(projectData)
 }
-
-// Dummy API (for testing)
-const fakeData = {"tempurature": 280}
-
-app.get('/fakeAPI', getFakeData)
-
-function getFakeData(req, res) {
-  res.send(Object.values(fakeData));
-}
-// * * * * *

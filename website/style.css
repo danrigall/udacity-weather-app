@@ -67,6 +67,11 @@ textarea {
   resize: none;
 }
 
+.invalid {
+  border: solid red !important;
+  background-color: pink !important;
+}
+
 #generate {
   padding: 8px 12px 6px;
   font-family: 'Gill Sans', sans-serif;

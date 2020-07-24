@@ -1,50 +1,41 @@
+// Global Variables
+const baseURL = 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&zip=';
+const apiKey = '&appid=0b09e4144e6ece0ef3dc8e51ae487fe4';
+const zip = document.getElementById('zip');
+const feelings = document.getElementById('feelings');
+
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
 
-// TODO: FIGURE OUT CLICK EVENT!!!!!!!!!!
-function checkEmpty() {
-  const zip = document.getElementById('zip').value
-  const feelings = document.getElementById('feelings').value
-  if (zip === "" || feelings === "") {
-    console.log('zip and/or feelings are empty');
+// Function to make sure both required inputs are filled
+function clickRespond() {
+  if (zip.value.length !== 5) {
+    zip.classList.add('invalid');
+    console.log('Invalid zip code entered!')
+    alert('Please enter a 5-digit zip code!')
+  } else if (feelings.value === "") {
+    feelings.classList.add('invalid');
+    console.log('Both input fields must be filled!');
+    alert('Please enter some weathery thoughts to post!')
   } else {
-    clickRespond()
+    fetchAndPost()
   }
 }
 
-function clickRespond(evt) {
-  const thoughts = document.getElementById('feelings').value;
-  // Dummy API call
-  getTemp('/fakeAPI')
+function fetchAndPost() {
+  const zipValue = zip.value;
+  // getTemp('/simAPI')
+  console.log(baseURL + zipValue + apiKey)
+  getTemp(baseURL, zipValue, apiKey)
   .then(function(temp) {
     console.log(temp)
-    postData('/add', {temp, date: newDate, thoughts: thoughts})
+    return postData('/add', {temp: temp, date: newDate, thoughts: feelings.value})
   })
   .then(function() {
     updateUI();
   })
 }
-
-// function performAction(e) {
-//   const zip = document.getElementById('zip').value;
-//   const feelings = document.getElementById('feelings').value;
-//   getWeather(baseURL, zip, apiKey)
-//     .then(function (data) {
-//       console.log(data);
-//       postData('/addData', {
-//         date: d,
-//         temp: data.main.temp,
-//         content: feelings
-//       })
-//     })
-//     .then(function () { updateUI() }
-//     )
-// }
-
-// Global Variables
-const baseURL = 'https://openweathermap.org/current';
-const apiKey = '0b09e4144e6ece0ef3dc8e51ae487fe4';
 
 // Async POST
 const postData = async (url='', data={})=> {
@@ -64,19 +55,20 @@ const postData = async (url='', data={})=> {
 };
 
 // Async GET
-const getTemp = async (url)=> {
-  const request = await fetch(url);
+const getTemp = async (baseURL, zip, key)=> {
+  const request = await fetch(baseURL+zip+key);
+// const getTemp = async (url) => {
+//   const request = await fetch(url);
   try {
     const allData = await request.json()
-    console.log(allData);
-    return allData;
+    console.log(allData["main"]["temp"]);
+    return allData["main"]["temp"];
   } catch(error) {
     console.log("ERROR in GET:", error);
   }
 };
 
-
-
+// Update UI after fetching needed data
 const updateUI = async()=> {
   const request = await fetch('/all')
   try{
@@ -93,10 +85,10 @@ const updateUI = async()=> {
 }
 
 function clearFields() {
-  document.getElementById('zip').value = ""
-  document.getElementById('feelings').value = ""
+  zip.value = ""
+  feelings.value = ""
+  zip.classList.remove('invalid')
+  feelings.classList.remove('invalid')
 }
 
-document.getElementById('generate').addEventListener('click', checkEmpty)
-
-// checkEmpty();
+document.getElementById('generate').addEventListener('click', clickRespond)
