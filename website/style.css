@@ -82,7 +82,7 @@ textarea {
   text-transform: uppercase;
 }
 
-#submit:hover {
+#generate:hover {
   border: 2px outset goldenrod;
   color: white;
   background-color: midnightblue;

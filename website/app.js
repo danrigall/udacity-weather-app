@@ -9,15 +9,14 @@ let d = new Date();
 let newDate = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Function to make sure both required inputs are filled
-function clickRespond() {
+function clickRespond(e) {
   if (zip.value.length !== 5) {
     zip.classList.add('invalid');
     console.log('Invalid zip code entered!')
-    alert('Please enter a 5-digit zip code!')
-  } else if (feelings.value === "") {
+  } else if (feelings.value.length < 4) {
     feelings.classList.add('invalid');
     console.log('Both input fields must be filled!');
-    alert('Please enter some weathery thoughts to post!')
+    // alert('Please enter some weathery thoughts to post!')
   } else {
     fetchAndPost()
   }
@@ -26,7 +25,6 @@ function clickRespond() {
 function fetchAndPost() {
   const zipValue = zip.value;
   // getTemp('/simAPI')
-  console.log(baseURL + zipValue + apiKey)
   getTemp(baseURL, zipValue, apiKey)
   .then(function(temp) {
     console.log(temp)
@@ -35,6 +33,19 @@ function fetchAndPost() {
   .then(function() {
     updateUI();
   })
+}
+
+// Async GET
+const getTemp = async (baseURL, zip, key)=>{
+  const request = await fetch(baseURL + zip + key);
+  // const getTemp = async (url) => {
+  //   const request = await fetch(url);
+  try {
+    const allData = await request.json()
+    return allData["main"]["temp"];
+  } catch (error) {
+    console.log("ERROR in GET:", error);
+  }
 }
 
 // Async POST
@@ -47,24 +58,9 @@ const postData = async (url='', data={})=> {
   });
   try {
     const newData = await response.json();
-    console.log(newData);
     return newData
   } catch(error) {
     console.log('ERROR in POST:', error);
-  }
-};
-
-// Async GET
-const getTemp = async (baseURL, zip, key)=> {
-  const request = await fetch(baseURL+zip+key);
-// const getTemp = async (url) => {
-//   const request = await fetch(url);
-  try {
-    const allData = await request.json()
-    console.log(allData["main"]["temp"]);
-    return allData["main"]["temp"];
-  } catch(error) {
-    console.log("ERROR in GET:", error);
   }
 };
 
@@ -73,7 +69,6 @@ const updateUI = async()=> {
   const request = await fetch('/all')
   try{
     const allData = await request.json()
-    console.log(allData)
     document.getElementById('entryHolder').style.display = 'block'
     document.getElementById('date').innerHTML = `<u>Date:</u> ${allData[0].date}`
     document.getElementById('temp').innerHTML = `<u>Temperature:</u> ${allData[0].temp}&deg`

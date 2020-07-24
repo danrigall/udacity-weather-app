@@ -15,11 +15,11 @@
     <div id="instructions">
       <h3>Enter your zip code & some weathery thoughts to post!</h3>
     </div>
-    <div id="form">
-      <input type="text" id="zip" placeholder="enter zip code here"><br>
-      <textarea  id="feelings" placeholder="Write your thoughts here..."></textarea>
-      <button id="generate">Submit</button>
-    </div>
+    <form id="form" onsubmit="return false">
+      <input type="text" id="zip" pattern="[0-9]{5}" title="5 digit zip code" placeholder="enter zip code here"><br>
+      <textarea  id="feelings" placeholder="Write your thoughts here..." minlength="4"></textarea>
+      <button id="generate">Generate</button>
+    </form>
     <section id="all_posts">
       <div id="entryHolder">
         <div id="date"></div>
