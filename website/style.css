@@ -1,22 +1,26 @@
 /* Full body style */
 body {
   height: 100vh;
-  padding: 2rem;
+  margin: auto;
   background: linear-gradient(160deg, #0087ff, #ffc068);
 }
 
 
 /* Page header styles */
 #page_header {
-  font-family: 'Skia', sans-serif;
+  font-family: 'Pacifico', cursive;
+  margin: 0rem 3rem;
 }
 
 #page_header h1 {
   font-weight: normal;
   font-size: 5rem;
+  font-family: 'Comfortaa', cursive;
   color: white;
-  letter-spacing: 8px;
+  letter-spacing: 3px;
   text-shadow: white 4px 1px 6px;
+  margin: auto;
+  padding-top: 4rem;
 }
 
 #page_header h2 {
@@ -24,16 +28,15 @@ body {
   font-size: 3rem;
   color: white;
   word-spacing: 2rem;
+  text-shadow: white 2px 1px 6px;
+  margin: auto;
 }
 
 
 /* Main section styles */
 #instructions {
-  font-family: 'Gil Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-style: italic;
-}
-
-#instructions h3 {
   font-size: 1.5rem;
   font-weight: 100;
   text-shadow: darkgrey 1px 1px 2px;
@@ -41,7 +44,7 @@ body {
 }
 
 #form {
-  padding: 0px;
+  padding: 1rem 3rem;
   font-family: Courier, serif;
 }
 
@@ -52,17 +55,17 @@ body {
   border-radius: 3px;
   border: 2px solid darkgoldenrod;
   margin: 5px 0px;
-  background-color: #ffffffa1;
+  background-color: #ffffff7a;
 }
 
-textarea {
+#feelings {
   width: 100%;
   height: 150px;
   padding: 12px;
   box-sizing: border-box;
   border: 2px solid darkgoldenrod;
   border-radius: 4px;
-  background-color: #ffffffa1;
+  background-color: #ffffff7a;
   font-size: 16px;
   resize: none;
 }
@@ -74,30 +77,29 @@ textarea {
 
 #generate {
   padding: 8px 12px 6px;
-  font-family: 'Gill Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   background-color: steelblue;
   border-radius: 3px;
   margin-top: 4px;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 #generate:hover {
   border: 2px outset goldenrod;
   color: white;
-  background-color: midnightblue;
+  background-color: #002540;
 }
 
 
 /* Post area */
 #all_posts {
-  height: 100%;
   margin-top: 10px;
   padding-top: 10px;
-  border: 3px inset #a9a9a98c;
-  border-radius: 10px;
-  background-color: #2121218c;
+  background-color: #002540;
   min-height: 200px;
+  box-shadow: 0px -1px 19px white;
 }
 
 #entryHolder {
@@ -108,7 +110,13 @@ textarea {
   padding: 10px;
   margin: 20px;
   width: 40rem;
-  box-shadow: darkslategrey 5px 5px 12px;
-  font-family: 'Bradley Hand', sans-serif;
+  box-shadow: black 5px 5px 12px;
+  font-family: 'Pacifico', cursive;
   word-spacing: 1px;
+  font-size: 18px;
+  color: #4a4a4a;
+}
+
+#content {
+  font-size: 1.5rem;
 }
