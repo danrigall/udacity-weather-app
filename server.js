@@ -31,7 +31,7 @@ app.get('/all', (req, res)=> {
   res.send(projectData);
 });
 
-// TODO: SET UP POST ROUTES
+// Set up POST route
 app.post('/add', addData);
 
 function addData (req, res) {

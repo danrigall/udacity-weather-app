@@ -8,7 +8,7 @@ const feelings = document.getElementById('feelings');
 let d = new Date();
 let newDate = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
 
-// Function to make sure both required inputs are filled
+// Function to respond to the click only after rquirements are filled
 function clickRespond(e) {
   if (zip.value.length !== 5) {
     zip.classList.add('invalid');
@@ -16,7 +16,6 @@ function clickRespond(e) {
   } else if (feelings.value.length < 4) {
     feelings.classList.add('invalid');
     console.log('Both input fields must be filled!');
-    // alert('Please enter some weathery thoughts to post!')
   } else {
     fetchAndPost()
   }
@@ -24,7 +23,6 @@ function clickRespond(e) {
 
 function fetchAndPost() {
   const zipValue = zip.value;
-  // getTemp('/simAPI')
   getTemp(baseURL, zipValue, apiKey)
   .then(function(temp) {
     console.log(temp)
@@ -38,8 +36,6 @@ function fetchAndPost() {
 // Async GET
 const getTemp = async (baseURL, zip, key)=>{
   const request = await fetch(baseURL + zip + key);
-  // const getTemp = async (url) => {
-  //   const request = await fetch(url);
   try {
     const allData = await request.json()
     return allData["main"]["temp"];
