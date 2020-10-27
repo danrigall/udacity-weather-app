@@ -19,7 +19,7 @@ app.use(express.static('website'));
 const port = 8000;
 
 // Confirm that server is running
-const server = app.listen(port,()=>{
+const server = app.listen(port,() => {
   console.log(`Server running on localhost: ${port}`)
 });
 
@@ -27,7 +27,7 @@ const server = app.listen(port,()=>{
 const projectData = []
 
 // Set up GET route
-app.get('/all', (req, res)=> {
+app.get('/all', (req, res) => {
   res.send(projectData);
 });
 

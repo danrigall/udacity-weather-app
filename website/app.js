@@ -1,15 +1,16 @@
+const dotenv = require('dotenv')
+dotenv.config()
+
 // Global Variables
-const baseURL = 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&zip=';
-const apiKey = '&appid=0b09e4144e6ece0ef3dc8e51ae487fe4';
 const zip = document.getElementById('zip');
 const feelings = document.getElementById('feelings');
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = (d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Function to respond to the click only after rquirements are filled
-function clickRespond(e) {
+function clickRespond() {
   if (zip.value.length !== 5) {
     zip.classList.add('invalid');
     console.log('Invalid zip code entered!')
@@ -22,9 +23,12 @@ function clickRespond(e) {
 }
 
 function fetchAndPost() {
+  const baseURL = 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&zip=';
   const zipValue = zip.value;
+  const apiKey = '&appid=' + process.env.API_KEY;
+
   getTemp(baseURL, zipValue, apiKey)
-  .then(function(temp) {
+  .then((temp) => {
     console.log(temp)
     return postData('/add', {temp: temp, date: newDate, thoughts: feelings.value})
   })
@@ -34,11 +38,11 @@ function fetchAndPost() {
 }
 
 // Async GET
-const getTemp = async (baseURL, zip, key)=>{
-  const request = await fetch(baseURL + zip + key);
+const getTemp = async(url, zip, key) => {
+  const request = await fetch(url + zip + key);
   try {
     const allData = await request.json()
-    return allData["main"]["temp"];
+    return allData.main.temp;
   } catch (error) {
     console.log("ERROR in GET:", error);
   }
