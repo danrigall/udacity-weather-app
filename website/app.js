@@ -1,13 +1,8 @@
-const dotenv = require('dotenv')
-dotenv.config()
-
 // Global Variables
 const zip = document.getElementById('zip');
 const feelings = document.getElementById('feelings');
 
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = (d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
+
 
 // Function to respond to the click only after rquirements are filled
 function clickRespond() {
@@ -18,53 +13,37 @@ function clickRespond() {
     feelings.classList.add('invalid');
     console.log('Both input fields must be filled!');
   } else {
-    fetchAndPost()
+    postAndFetch()
   }
 }
 
-function fetchAndPost() {
-  const baseURL = 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&zip=';
-  const zipValue = zip.value;
-  const apiKey = '&appid=' + process.env.API_KEY;
-
-  getTemp(baseURL, zipValue, apiKey)
-  .then((temp) => {
-    console.log(temp)
-    return postData('/add', {temp: temp, date: newDate, thoughts: feelings.value})
+function postAndFetch() {
+  postInput('/add', {zip: zip.value, thoughts: feelings.value})
+  .then((object) => {
+    console.log(object)
+    updateUI(object)
   })
-  .then(function() {
-    updateUI();
-  })
+  clearFields()
 }
 
-// Async GET
-const getTemp = async(url, zip, key) => {
-  const request = await fetch(url + zip + key);
-  try {
-    const allData = await request.json()
-    return allData.main.temp;
-  } catch (error) {
-    console.log("ERROR in GET:", error);
-  }
-}
-
-// Async POST
-const postData = async (url='', data={})=> {
-  const response = await fetch(url, {
+const postInput = async (url, data) => {
+  const request = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',
-    headers: {'Content-Type': 'application/json',},
+    headers: { 'Content-Type': 'application/json', },
     body: JSON.stringify(data),
   });
   try {
-    const newData = await response.json();
-    return newData
-  } catch(error) {
+    const response = await request.json();
+    console.log(response)
+    return response
+  } catch (error) {
     console.log('ERROR in POST:', error);
   }
 };
 
-// Update UI after fetching needed data
+// *** TODO: Add ability to post multiple entries! ***
+// *** TODO: Add more weather data bits & cool icons/graphics!! ***
 const updateUI = async()=> {
   const request = await fetch('/all')
   try{
@@ -73,7 +52,6 @@ const updateUI = async()=> {
     document.getElementById('date').innerHTML = `<u>Date:</u> ${allData[0].date}`
     document.getElementById('temp').innerHTML = `<u>Temperature:</u> ${allData[0].temp}&deg`
     document.getElementById('content').innerHTML = allData[0].thoughts
-    clearFields();
   } catch(error){
     console.log('ERROR in UI update:', error)
   }

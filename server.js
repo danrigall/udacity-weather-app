@@ -13,6 +13,12 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
+// Pull sensitive info with dotenv
+const dotenv = require('dotenv')
+dotenv.config()
+
+const fetch = require('node-fetch');
+
 // Initialize main project folder
 app.use(express.static('website'));
 
@@ -31,17 +37,43 @@ app.get('/all', (req, res) => {
   res.send(projectData);
 });
 
+const addData = async (req, res) => {
+  let newInput = {
+    zip: req.body.zip,
+    thoughts: req.body.thoughts
+  }
+  console.log(newInput)
+  const weather = await getWeather(newInput.zip);
+  let finalEntry = {
+    date: getDate(),
+    temp: weather.main.temp,
+    thoughts: newInput.thoughts,
+  }
+  projectData.unshift(finalEntry)
+  res.send(projectData)
+  console.log(projectData)
+}
+
 // Set up POST route
 app.post('/add', addData);
 
-function addData (req, res) {
-  let newData = {
-    date: req.body.date,
-    temp: req.body.temp,
-    thoughts: req.body.thoughts
+function getDate() {
+  let d = new Date();
+  let newDate = (d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear();
+  return newDate
+}
+
+// GET from OpenWeather API
+const getWeather = async (zip) => {
+  const baseURL = 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&zip=';
+  const apiKey = '&appid=' + process.env.API_KEY;
+
+  const request = await fetch(baseURL + zip + apiKey);
+  try {
+    const weatherData = await request.json()
+    console.log(weatherData);
+    return weatherData;
+  } catch (error) {
+    console.log("ERROR in GET:", error);
   }
-  console.log(newData)
-  projectData.unshift(newData)
-  res.send(projectData)
-  console.log(projectData)
 }
