@@ -33,9 +33,9 @@ const server = app.listen(port,() => {
 const projectData = []
 
 // Set up GET route
-app.get('/all', (req, res) => {
-  res.send(projectData);
-});
+// app.get('/all', (req, res) => {
+//   res.send(projectData);
+// });
 
 const addData = async (req, res) => {
   let newInput = {
@@ -44,13 +44,13 @@ const addData = async (req, res) => {
   }
   console.log(newInput)
   const weather = await getWeather(newInput.zip);
-  let finalEntry = {
+  let latestEntry = {
     date: getDate(),
     temp: weather.main.temp,
     thoughts: newInput.thoughts,
   }
-  projectData.unshift(finalEntry)
-  res.send(projectData)
+  projectData.unshift(latestEntry)
+  res.send(projectData[0])
   console.log(projectData)
 }
 

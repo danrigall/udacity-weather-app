@@ -20,7 +20,6 @@ function clickRespond() {
 function postAndFetch() {
   postInput('/add', {zip: zip.value, thoughts: feelings.value})
   .then((object) => {
-    console.log(object)
     updateUI(object)
   })
   clearFields()
@@ -42,19 +41,17 @@ const postInput = async (url, data) => {
   }
 };
 
-// *** TODO: Add ability to post multiple entries! ***
+// *** TODO: Make each entry stay after REFRESH!! ***
 // *** TODO: Add more weather data bits & cool icons/graphics!! ***
-const updateUI = async()=> {
-  const request = await fetch('/all')
-  try{
-    const allData = await request.json()
-    document.getElementById('entryHolder').style.display = 'block'
-    document.getElementById('date').innerHTML = `<u>Date:</u> ${allData[0].date}`
-    document.getElementById('temp').innerHTML = `<u>Temperature:</u> ${allData[0].temp}&deg`
-    document.getElementById('content').innerHTML = allData[0].thoughts
-  } catch(error){
-    console.log('ERROR in UI update:', error)
-  }
+function updateUI(object) {
+  const newDiv = document.createElement('div');
+  newDiv.classList.add('entryHolder');
+  newDiv.innerHTML = `
+      <div class="date"><u>Date:</u> ${object.date}</div>
+      <div class="temp"><u>Temperature:</u> ${object.temp}</div>
+      <div class="content">${object.thoughts}</div>
+  `;
+  document.getElementById('all_posts').appendChild(newDiv)
 }
 
 function clearFields() {
